@@ -36,10 +36,23 @@ string encoder( string input ){
 };
 
 
-// For some reason, you have to put a indexing number in order for the map to be sorted.
-//
 // Without '?' character at the end of base_url
 string encode_hashmap( string base_url ,map<string, string> map ) {
+    string result;
+    result += '?';
+    for (auto keypair : map){
+        result +='&';
+        
+        // .erase removes the incrementing index at the start
+        result += encoder(keypair.first) + '=' + encoder(keypair.second);
+    }
+    //  this erase removes & at the start
+    return base_url+result.erase(1,1);
+};
+
+// For some reason, you have to put a indexing number in order for the map to be sorted.
+// Without '?' character at the end of base_url
+string encode_hashmap_ordered( string base_url ,map<string, string> map ) {
     string result;
     result += '?';
     for (auto keypair : map){
