@@ -7,7 +7,8 @@ using std::unordered_map;
 
 string encoder( string input ){
 
-
+    string output;
+    
     unordered_map<char, string> reserved;
 
         reserved[' '] = "%20"; reserved['!'] = "%21"; reserved['"'] = "%22"; reserved['#'] = "%23";
@@ -19,7 +20,6 @@ string encoder( string input ){
         reserved['^'] = "%5E"; reserved['`'] = "%60"; reserved['{'] = "%7B"; reserved['|'] = "%7C";
         reserved['}'] = "%7D";
         
-    string output;
 
     for( int t = 0 ; t <= input.length() ; t++) {
         int found = 0;
