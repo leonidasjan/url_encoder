@@ -21,8 +21,8 @@ string encoder( string input ){
         reserved['^'] = "%5E"; reserved['`'] = "%60"; reserved['{'] = "%7B"; reserved['|'] = "%7C";
         reserved['}'] = "%7D";
         
-
-    for( int t = 0 ; t <= input.length() ; t++) {
+    size_t t;
+    for( t = 0 ; t <= input.length() ; t++) {
         int found = 0;
         for ( auto ch : reserved ) {
             if ( input[t] == ch.first ) {
@@ -73,7 +73,7 @@ string encode_hashmap_ordered( string base_url ,map<string, string> map ) {
     //  this erase removes & at the start
     result.erase(1,1);
     // Remove any null terminate char
-    int temp = 0;
+    size_t temp = 0;
         for (unsigned char c : result){
 
             if ((int)c == 0) {
@@ -87,3 +87,7 @@ string encode_hashmap_ordered( string base_url ,map<string, string> map ) {
 
     return base_url+result;
 };
+
+int main(){
+    
+}
