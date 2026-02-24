@@ -123,14 +123,11 @@ string map_ordered( string base_url, std::map<string, string> m ) {
     return base_url+result;
 };
 // TODO: find out if i can use ref here
-nlohmann::json json( std::string base_url, nlohmann::json j ){
+std::string json( std::string base_url, nlohmann::json j ){
 
-    for (auto & [key,val] : j.items()) {
-        encode::str(key);
-        encode::str(val);
-    };
+    std::string result = base_url+'?'+encode::str(j.dump());
 
-    return j;
+    return result;
 }
 
 
