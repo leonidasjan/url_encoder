@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <map>
@@ -6,7 +7,9 @@ using std::string;
 using std::map;
 using std::unordered_map;
 
-string encoder( string input ){
+
+namespace encode {
+string str( string input ){
 
     string output;
 
@@ -39,31 +42,31 @@ string encoder( string input ){
     return output;
 };
 
-
-// Without '?' character at the end of base_url
-string encode_hashmap( string base_url, map<string, string> map ) {
+string map( string base_url, std::map<string, string> m ) {
     string result;
+    
     result += '?';
-    for (auto keypair : map){
+
+    for (auto keypair : m){
         result +='&';
         
         // .erase removes the incrementing index at the start
-        result += encoder(keypair.first) + '=' + encoder(keypair.second);
+        result += encode::str(keypair.first) + '=' + encode::str(keypair.second);
     }
     //  this erase removes & at the start
     return base_url+result.erase(1,1);
 };
 
-string encode_hashmap_withoutURL(map<string, string> map ) {
+string map(std::map<string, string> m ) {
 
-    string result = "?";
+    string result; // NO ? sign check shuffler if it matches
 
-    for ( auto keypair : map ) {
+    for ( auto keypair : m ) {
 
         result +='&';
         string str1 = keypair.first;
         // .erase removes the incrementing index at the start
-        result += encoder(str1.erase(0,1)) + '=' + encoder(keypair.second);
+        result += encode::str(str1.erase(0,1)) + '=' + encode::str(keypair.second);
 
     };
 
@@ -86,18 +89,17 @@ string encode_hashmap_withoutURL(map<string, string> map ) {
     return result;
 };
 
-// For some reason, you have to put a indexing number in order for the map to be sorted.
-// Without '?' character at the end of base_url
-string encode_hashmap_ordered( string base_url ,map<string, string> map ) {
+// put a indexing number in first key character for the map to be sorted.
+string map_ordered( string base_url ,std::map<string, string> m ) {
 
     string result = "?";
 
-    for ( auto keypair : map ) {
+    for ( auto keypair : m ) {
 
         result +='&';
         string str1 = keypair.first;
         // .erase removes the incrementing index at the start
-        result += encoder(str1.erase(0,1)) + '=' + encoder(keypair.second);
+        result += encode::str(str1.erase(0,1)) + '=' + encode::str(keypair.second);
 
     };
 
@@ -119,3 +121,6 @@ string encode_hashmap_ordered( string base_url ,map<string, string> map ) {
 
     return base_url+result;
 }; // TODO make a header only version
+
+
+};
