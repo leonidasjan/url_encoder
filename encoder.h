@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <unordered_map>
+#include "nlohmann/json.hpp"
 using std::string;
 using std::map;
 using std::unordered_map;
@@ -90,7 +91,7 @@ string map(std::map<string, string> m ) {
 };
 
 // put a indexing number in first key character for the map to be sorted.
-string map_ordered( string base_url ,std::map<string, string> m ) {
+string map_ordered( string base_url, std::map<string, string> m ) {
 
     string result = "?";
 
@@ -120,7 +121,17 @@ string map_ordered( string base_url ,std::map<string, string> m ) {
 
 
     return base_url+result;
-}; // TODO make a header only version
+};
+// TODO: find out if i can use ref here
+nlohmann::json json( std::string base_url, nlohmann::json j ){
+
+    for (auto & [key,val] : j.items()) {
+        encode::str(key);
+        encode::str(val);
+    };
+
+    return j;
+}
 
 
 };
