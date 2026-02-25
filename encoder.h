@@ -10,7 +10,7 @@ using std::unordered_map;
 
 
 namespace encode {
-string str( string input ){
+inline string str(const string input ){
 
     string output;
 
@@ -43,7 +43,7 @@ string str( string input ){
     return output;
 };
 
-string map( string base_url, std::map<string, string> m ) {
+inline string map(const string base_url, std::map<string, string> m ) {
     string result;
     
     result += '?';
@@ -58,7 +58,7 @@ string map( string base_url, std::map<string, string> m ) {
     return base_url+result.erase(1,1);
 };
 
-string map(std::map<string, string> m ) {
+inline string map(std::map<string, string> m ) {
 
     string result; // NO ? sign check shuffler if it matches
 
@@ -91,7 +91,7 @@ string map(std::map<string, string> m ) {
 };
 
 // put a indexing number in first key character for the map to be sorted.
-string map_ordered( string base_url, std::map<string, string> m ) {
+inline string map_ordered(const string base_url, std::map<string, string> m ) {
 
     string result = "?";
 
@@ -123,7 +123,7 @@ string map_ordered( string base_url, std::map<string, string> m ) {
     return base_url+result;
 };
 // TODO: find out if i can use ref here
-std::string json( std::string base_url, nlohmann::json j ){
+inline std::string json(const std::string base_url,const nlohmann::json &j ){
 
     std::string result = base_url+'?'+encode::str(j.dump());
 
