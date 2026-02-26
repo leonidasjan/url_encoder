@@ -122,7 +122,7 @@ inline string map_ordered(const string base_url, std::map<string, string> m ) {
 
     return base_url+result;
 };
-// TODO: find out if i can use ref here
+
 inline std::string json(const std::string base_url,const nlohmann::json &j ){
 
     std::string result = base_url+'?'+encode::str(j.dump());
